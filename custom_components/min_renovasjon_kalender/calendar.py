@@ -27,7 +27,7 @@ class MinRenovasjonCalendar(
     """Calendar entity that shows one event per waste pickup day."""
 
     _attr_has_entity_name = True
-    _attr_name = "min_renovasjon"
+    _attr_name = "Min Renovasjon"
     _attr_translation_key = "min_renovasjon_kalender"
 
     def __init__(
