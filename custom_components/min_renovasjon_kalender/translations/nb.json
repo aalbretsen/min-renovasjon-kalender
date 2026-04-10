@@ -1,0 +1,40 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Min Renovasjon Kalender",
+        "description": "Skriv inn adressen din for å slå opp henteplan for avfall.",
+        "data": {
+          "address": "Adresse (f.eks. 'Min gate 12, 0153')"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kunne ikke koble til Min Renovasjon-tjenesten.",
+      "no_address_found": "Ingen adresse funnet. Prøv et mer spesifikt søk.",
+      "multiple_addresses_found": "Flere adresser funnet. Vennligst vær mer spesifikk.",
+      "municipality_not_customer": "Denne kommunen støtter ikke Min Renovasjon.",
+      "unknown": "En uventet feil oppstod."
+    },
+    "abort": {
+      "already_configured": "Denne adressen er allerede konfigurert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Innstillinger",
+        "data": {
+          "calendar_days": "Antall dager å vise i kalenderen (30–730)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "calendar": {
+      "hentekalender": {
+        "name": "Hentekalender"
+      }
+    }
+  }
+}

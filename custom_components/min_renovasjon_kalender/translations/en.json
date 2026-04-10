@@ -1,0 +1,40 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Min Renovasjon Kalender",
+        "description": "Enter your address to look up the waste collection schedule.",
+        "data": {
+          "address": "Address (e.g. 'Min gate 12, 0153')"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the Min Renovasjon service.",
+      "no_address_found": "No address found. Try a more specific search.",
+      "multiple_addresses_found": "Multiple addresses found. Please be more specific.",
+      "municipality_not_customer": "This municipality does not support Min Renovasjon.",
+      "unknown": "An unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This address is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Settings",
+        "data": {
+          "calendar_days": "Number of days to show in calendar (30–730)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "calendar": {
+      "hentekalender": {
+        "name": "Pickup calendar"
+      }
+    }
+  }
+}

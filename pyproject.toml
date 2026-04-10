@@ -1,0 +1,48 @@
+[project]
+name = "min-renovasjon-kalender"
+version = "1.0.0"
+description = "Home Assistant custom integration – waste collection calendar for Norwegian municipalities"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+
+# No runtime dependencies – HA provides everything at runtime.
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "homeassistant",
+    "pytest",
+    "pytest-asyncio",
+    "pytest-homeassistant-custom-component",
+    "ruff",
+    "mypy",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "RUF",    # ruff-specific
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["custom_components.min_renovasjon_kalender"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+follow_imports = "silent"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

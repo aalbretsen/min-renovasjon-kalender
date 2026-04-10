@@ -1,0 +1,9 @@
+# Development dependencies for IntelliJ / PyCharm auto-detection.
+# Create a venv and install:  pip install -r requirements_dev.txt
+
+homeassistant
+pytest
+pytest-asyncio
+pytest-homeassistant-custom-component
+ruff
+mypy
