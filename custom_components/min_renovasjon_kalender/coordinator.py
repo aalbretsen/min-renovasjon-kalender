@@ -147,12 +147,14 @@ def _build_pickup_events(
     events: list[PickupEvent] = []
     for pickup_date in sorted(date_fractions):
         fracs = sorted(date_fractions[pickup_date])
-        if len(fracs) == 1:
-            desc = fracs[0]
-        elif len(fracs) == 2:
-            desc = f"{fracs[0]} og {fracs[1]}"
+        fracs_lower = [f.lower() for f in fracs]
+        if len(fracs_lower) == 1:
+            desc = fracs_lower[0]
+        elif len(fracs_lower) == 2:
+            desc = f"{fracs_lower[0]} og {fracs_lower[1]}"
         else:
-            desc = ", ".join(fracs[:-1]) + " og " + fracs[-1]
+            desc = ", ".join(fracs_lower[:-1]) + " og " + fracs_lower[-1]
+        desc = desc[0].upper() + desc[1:]
         events.append(PickupEvent(date=pickup_date, description=desc, fractions=fracs))
 
     return events
