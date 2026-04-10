@@ -3,16 +3,16 @@
     "step": {
       "user": {
         "title": "Min Renovasjon Kalender",
-        "description": "Skriv inn adressen din for å slå opp henteplan for avfall.",
+        "description": "Skriv inn adressen henteplan for avfall skal gjelde for.",
         "data": {
           "address": "Adresse (f.eks. 'Min gate 12, 0153')"
         }
       }
     },
     "error": {
-      "cannot_connect": "Kunne ikke koble til Min Renovasjon-tjenesten.",
-      "no_address_found": "Ingen adresse funnet. Prøv et mer spesifikt søk.",
-      "multiple_addresses_found": "Flere adresser funnet. Vennligst vær mer spesifikk.",
+      "cannot_connect": "Kunne ikke koble til Min Renovasjon tjenesten.",
+      "no_address_found": "Ingen adresse funnet, prøv et mer spesifikt søk.",
+      "multiple_addresses_found": "Flere adresser funnet, vennligst vær mer spesifikk.",
       "municipality_not_customer": "Denne kommunen støtter ikke Min Renovasjon.",
       "unknown": "En uventet feil oppstod."
     },
@@ -27,12 +27,14 @@
         "data": {
           "calendar_days": "Dager fremover (30–730)",
           "calendar_days_back": "Dager bakover (0–365)",
+          "event_summary": "Hendelsesoverskrift",
           "excluded_fraction_ids": "Ekskluder fraksjoner"
         },
         "data_description": {
-          "calendar_days": "Antall dager fremover i tid å vise henteplan for.",
-          "calendar_days_back": "Antall dager bakover i tid å inkludere henteplan for.",
-          "excluded_fraction_ids": "Velg fraksjoner som skal skjules fra kalenderen (f.eks. returpunkter som alltid er tilgjengelige)."
+          "calendar_days": "Antall dager fremover i tid henteplan skal vises for.",
+          "calendar_days_back": "Antall dager bakover i tid henteplan skal vises for.",
+          "event_summary": "Tittel som vises på hver kalenderhendelse.",
+          "excluded_fraction_ids": "Velg fraksjoner som skal skjules fra kalenderen."
         }
       }
     }

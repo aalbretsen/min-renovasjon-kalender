@@ -27,12 +27,14 @@
         "data": {
           "calendar_days": "Days forward (30–730)",
           "calendar_days_back": "Days back (0–365)",
+          "event_summary": "Event summary",
           "excluded_fraction_ids": "Exclude fractions"
         },
         "data_description": {
           "calendar_days": "Number of days into the future to show pickup events.",
           "calendar_days_back": "Number of days in the past to include pickup events for.",
-          "excluded_fraction_ids": "Select fractions to hide from the calendar (e.g. always-available drop-off points)."
+          "event_summary": "Title shown on each calendar event.",
+          "excluded_fraction_ids": "Select fractions to hide from the calendar."
         }
       }
     }

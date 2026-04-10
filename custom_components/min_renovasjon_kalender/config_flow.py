@@ -22,12 +22,14 @@ from .const import (
     CONF_CALENDAR_DAYS,
     CONF_CALENDAR_DAYS_BACK,
     CONF_COUNTY_ID,
+    CONF_EVENT_SUMMARY,
     CONF_EXCLUDED_FRACTION_IDS,
     CONF_HOUSE_NO,
     CONF_STREET_CODE,
     CONF_STREET_NAME,
     DEFAULT_CALENDAR_DAYS,
     DEFAULT_CALENDAR_DAYS_BACK,
+    DEFAULT_EVENT_SUMMARY,
     DOMAIN,
 )
 
@@ -144,6 +146,9 @@ class MinRenovasjonKalenderOptionsFlow(OptionsFlow):
         current_excluded = self.config_entry.options.get(
             CONF_EXCLUDED_FRACTION_IDS, []
         )
+        current_summary = self.config_entry.options.get(
+            CONF_EVENT_SUMMARY, DEFAULT_EVENT_SUMMARY
+        )
 
         # Fetch available fractions from the API to build the multi-select
         available_fractions = await self._async_get_available_fractions()
@@ -155,6 +160,9 @@ class MinRenovasjonKalenderOptionsFlow(OptionsFlow):
             vol.Optional(
                 CONF_CALENDAR_DAYS_BACK, default=current_days_back
             ): vol.All(vol.Coerce(int), vol.Range(min=0, max=365)),
+            vol.Optional(
+                CONF_EVENT_SUMMARY, default=current_summary
+            ): cv.string,
         }
 
         if available_fractions:

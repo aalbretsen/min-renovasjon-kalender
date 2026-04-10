@@ -43,14 +43,15 @@ Click **Configure** on the integration card to change:
 | --- | --- | --- | --- |
 | `calendar_days` | 365 | 30–730 | How many days into the future to populate |
 | `calendar_days_back` | 30 | 0–365 | How many days in the past to include |
-| `excluded_fraction_ids` | _(none)_ | — | Fractions to hide from the calendar (e.g. always-available drop-off points) |
+| `event_summary` | 🗑️ Hentedag for søppel | — | Title shown on each calendar event |
+| `excluded_fraction_ids` | _(none)_ | — | Fractions to hide from the calendar |
 
 ## Calendar events
 Each event has:
 
 | Field | Value |
 | --- | --- |
-| **Summary** | 🗑️ Hentedag for søppel |
+| **Summary** | 🗑️ Hentedag for søppel _(configurable in options)_ |
 | **Description** | Comma-separated fractions, e.g. _"Restavfall, papir og plastemballasje"_ |
 | **Date** | All-day event on the pickup date |
 

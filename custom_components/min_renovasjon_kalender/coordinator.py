@@ -18,12 +18,14 @@ from .const import (
     CONF_CALENDAR_DAYS,
     CONF_CALENDAR_DAYS_BACK,
     CONF_COUNTY_ID,
+    CONF_EVENT_SUMMARY,
     CONF_EXCLUDED_FRACTION_IDS,
     CONF_HOUSE_NO,
     CONF_STREET_CODE,
     CONF_STREET_NAME,
     DEFAULT_CALENDAR_DAYS,
     DEFAULT_CALENDAR_DAYS_BACK,
+    DEFAULT_EVENT_SUMMARY,
     DOMAIN,
 )
 
@@ -81,6 +83,13 @@ class MinRenovasjonCoordinator(DataUpdateCoordinator[list[PickupEvent]]):
         """Return the set of fraction IDs to exclude."""
         ids = self.config_entry.options.get(CONF_EXCLUDED_FRACTION_IDS, [])
         return {int(fid) for fid in ids}
+
+    @property
+    def event_summary(self) -> str:
+        """Return the configured event summary text."""
+        return self.config_entry.options.get(
+            CONF_EVENT_SUMMARY, DEFAULT_EVENT_SUMMARY
+        )
 
     async def _async_update_data(self) -> list[PickupEvent]:
         """Fetch data from the API and return grouped pickup events."""

@@ -45,9 +45,10 @@ class MinRenovasjonCalendar(
         if not self.coordinator.data:
             return None
         today = date.today()
+        summary = self.coordinator.event_summary
         for pickup in self.coordinator.data:
             if pickup.date >= today:
-                return _pickup_to_event(pickup)
+                return _pickup_to_event(pickup, summary)
         return None
 
     async def async_get_events(
@@ -61,17 +62,18 @@ class MinRenovasjonCalendar(
             return []
         sd = start_date.date() if isinstance(start_date, datetime) else start_date
         ed = end_date.date() if isinstance(end_date, datetime) else end_date
+        summary = self.coordinator.event_summary
         return [
-            _pickup_to_event(p)
+            _pickup_to_event(p, summary)
             for p in self.coordinator.data
             if sd <= p.date <= ed
         ]
 
 
-def _pickup_to_event(pickup: PickupEvent) -> CalendarEvent:
+def _pickup_to_event(pickup: PickupEvent, summary: str) -> CalendarEvent:
     """Convert a PickupEvent to a CalendarEvent."""
     return CalendarEvent(
-        summary="🗑️ Hentedag for søppel",
+        summary=summary,
         description=pickup.description,
         start=pickup.date,
         end=pickup.date + timedelta(days=1),

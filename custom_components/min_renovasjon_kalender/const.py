@@ -16,6 +16,8 @@ DEFAULT_CALENDAR_DAYS = 365
 CONF_CALENDAR_DAYS_BACK = "calendar_days_back"
 DEFAULT_CALENDAR_DAYS_BACK = 30
 CONF_EXCLUDED_FRACTION_IDS = "excluded_fraction_ids"
+CONF_EVENT_SUMMARY = "event_summary"
+DEFAULT_EVENT_SUMMARY = "🗑️ Hentedag for søppel"
 
 # API constants
 CONST_KOMMUNE_NUMMER = "Kommunenr"
