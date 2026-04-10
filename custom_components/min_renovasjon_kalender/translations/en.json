@@ -39,8 +39,8 @@
   },
   "entity": {
     "calendar": {
-      "hentekalender": {
-        "name": "Pickup calendar"
+      "min_renovasjon": {
+        "name": "Min Renovasjon Pickup calendar"
       }
     }
   }
