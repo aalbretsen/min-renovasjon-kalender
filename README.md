@@ -21,6 +21,7 @@ A Home Assistant custom integration that exposes your Norwegian waste collection
 ### HACS (recommended)
 1. Open HACS → **Integrations** → three-dot menu → **Custom repositories**
 2. Add this repository URL with category **Integration**
+   ( https://github.com/aalbretsen/min-renovasjon-kalender )
 3. Search for _Min Renovasjon Kalender_ and download
 4. Restart Home Assistant
 

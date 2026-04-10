@@ -16,11 +16,14 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from .api import MinRenovasjonApiClient, MinRenovasjonApiError
 from .const import (
     CONF_CALENDAR_DAYS,
+    CONF_CALENDAR_DAYS_BACK,
     CONF_COUNTY_ID,
+    CONF_EXCLUDED_FRACTION_IDS,
     CONF_HOUSE_NO,
     CONF_STREET_CODE,
     CONF_STREET_NAME,
     DEFAULT_CALENDAR_DAYS,
+    DEFAULT_CALENDAR_DAYS_BACK,
     DOMAIN,
 )
 
@@ -66,15 +69,26 @@ class MinRenovasjonCoordinator(DataUpdateCoordinator[list[PickupEvent]]):
             CONF_CALENDAR_DAYS, DEFAULT_CALENDAR_DAYS
         )
 
+    @property
+    def calendar_days_back(self) -> int:
+        """Return the configured lookback in days."""
+        return self.config_entry.options.get(
+            CONF_CALENDAR_DAYS_BACK, DEFAULT_CALENDAR_DAYS_BACK
+        )
+
+    @property
+    def excluded_fraction_ids(self) -> set[int]:
+        """Return the set of fraction IDs to exclude."""
+        ids = self.config_entry.options.get(CONF_EXCLUDED_FRACTION_IDS, [])
+        return {int(fid) for fid in ids}
+
     async def _async_update_data(self) -> list[PickupEvent]:
         """Fetch data from the API and return grouped pickup events."""
         session = async_get_clientsession(self.hass)
         client = MinRenovasjonApiClient(session)
 
-        fra_dato = date.today().strftime("%Y-%m-%d")
-        til_dato = (date.today() + timedelta(days=self.calendar_days)).strftime(
-            "%Y-%m-%d"
-        )
+        fra_dato = (date.today() - timedelta(days=self.calendar_days_back)).strftime("%Y-%m-%d")
+        til_dato = (date.today() + timedelta(days=self.calendar_days)).strftime("%Y-%m-%d")
 
         try:
             tommekalender = await client.async_get_tommekalender(
@@ -92,14 +106,20 @@ class MinRenovasjonCoordinator(DataUpdateCoordinator[list[PickupEvent]]):
         if not tommekalender or not fraksjoner:
             raise UpdateFailed("Empty response from Min Renovasjon API")
 
-        return _build_pickup_events(tommekalender, fraksjoner)
+        return _build_pickup_events(
+            tommekalender, fraksjoner, self.excluded_fraction_ids
+        )
 
 
 def _build_pickup_events(
     tommekalender: list[dict[str, Any]],
     fraksjoner: list[dict[str, Any]],
+    excluded_fraction_ids: set[int] | None = None,
 ) -> list[PickupEvent]:
     """Parse API data and group fractions by pickup date."""
+    if excluded_fraction_ids is None:
+        excluded_fraction_ids = set()
+
     # Build fraction-id → name map
     frac_names: dict[int, str] = {
         int(f["Id"]): f["Navn"] for f in fraksjoner
@@ -109,6 +129,8 @@ def _build_pickup_events(
     date_fractions: dict[date, list[str]] = defaultdict(list)
     for entry in tommekalender:
         frac_id = int(entry["FraksjonId"])
+        if frac_id in excluded_fraction_ids:
+            continue
         name = frac_names.get(frac_id, f"Ukjent ({frac_id})")
         for dt_str in entry.get("Tommedatoer", []):
             if not dt_str:

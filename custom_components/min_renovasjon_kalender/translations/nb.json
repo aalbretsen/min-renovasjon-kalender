@@ -25,7 +25,14 @@
       "init": {
         "title": "Innstillinger",
         "data": {
-          "calendar_days": "Antall dager å vise i kalenderen (30–730)"
+          "calendar_days": "Dager fremover (30–730)",
+          "calendar_days_back": "Dager bakover (0–365)",
+          "excluded_fraction_ids": "Ekskluder fraksjoner"
+        },
+        "data_description": {
+          "calendar_days": "Antall dager fremover i tid å vise henteplan for.",
+          "calendar_days_back": "Antall dager bakover i tid å inkludere henteplan for.",
+          "excluded_fraction_ids": "Velg fraksjoner som skal skjules fra kalenderen (f.eks. returpunkter som alltid er tilgjengelige)."
         }
       }
     }
