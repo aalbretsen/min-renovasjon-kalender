@@ -39,8 +39,8 @@
   },
   "entity": {
     "calendar": {
-      "min_renovasjon": {
-        "name": "Min Renovasjon Pickup calendar"
+      "min_renovasjon_kalender": {
+        "name": "Min Renovasjon"
       }
     }
   }
