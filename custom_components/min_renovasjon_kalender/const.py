@@ -12,9 +12,9 @@ CONF_COUNTY_ID = "county_id"
 
 # Options keys
 CONF_CALENDAR_DAYS = "calendar_days"
-DEFAULT_CALENDAR_DAYS = 365
+DEFAULT_CALENDAR_DAYS = 90
 CONF_CALENDAR_DAYS_BACK = "calendar_days_back"
-DEFAULT_CALENDAR_DAYS_BACK = 30
+DEFAULT_CALENDAR_DAYS_BACK = 14
 CONF_EXCLUDED_FRACTION_IDS = "excluded_fraction_ids"
 CONF_EVENT_SUMMARY = "event_summary"
 DEFAULT_EVENT_SUMMARY = "🗑️ Hentedag for søppel"
