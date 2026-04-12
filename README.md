@@ -1,9 +1,11 @@
 # Min Renovasjon Kalender
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![HACS][hacs-badge]][hacs-url]
+[![Release][release-badge]][release-url]
+[![License][license-badge]](LICENSE)
 
-A Home Assistant custom integration that exposes your Norwegian waste collection schedule as a **single calendar entity** — one event per pickup day listing everything being collected.
+A Home Assistant custom integration that exposes your Norwegian waste collection schedule as a **single calendar entity** 
+ — one event per pickup day listing everything being collected.
 
 ## Credits
 - **[eyesoft/home_assistant_min_renovasjon](https://github.com/eyesoft/home_assistant_min_renovasjon)** — the original Min Renovasjon integration that this project builds upon.
@@ -90,9 +92,16 @@ secondary: >-
 ```
 
 This shows the next pickup day with a Norwegian-formatted date, for example:
-
 > **Restavfall, papir og plastemballasje**
 > Hentes om 3 dager, torsdag 17. april
 
+
 ## License
-[MIT](LICENSE)
+
+MIT — see [LICENSE](LICENSE).
+
+[hacs-badge]: https://img.shields.io/badge/HACS-Custom-blue.svg
+[hacs-url]: https://hacs.xyz
+[release-badge]: https://img.shields.io/github/v/release/aalbretsen/min-renovasjon-kalender
+[release-url]: https://github.com/aalbretsen/min-renovasjon-kalender/releases
+[license-badge]: https://img.shields.io/github/license/aalbretsen/min-renovasjon-kalender
