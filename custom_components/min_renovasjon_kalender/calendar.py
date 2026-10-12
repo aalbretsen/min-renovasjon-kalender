@@ -1,21 +1,25 @@
 """Calendar platform for Min Renovasjon Kalender."""
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 
 from homeassistant.components.calendar import CalendarEntity, CalendarEvent
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.util import dt as dt_util
 
-from . import MinRenovasjonConfigEntry
-from .coordinator import MinRenovasjonCoordinator, PickupEvent
+from .coordinator import (
+    MinRenovasjonConfigEntry,
+    MinRenovasjonCoordinator,
+    PickupEvent,
+)
 
 
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: MinRenovasjonConfigEntry,
-    async_add_entities: AddEntitiesCallback,
+    async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up the calendar platform."""
     async_add_entities([MinRenovasjonCalendar(entry.runtime_data, entry)])
@@ -44,7 +48,7 @@ class MinRenovasjonCalendar(
         """Return the next upcoming event."""
         if not self.coordinator.data:
             return None
-        today = date.today()
+        today = dt_util.now().date()
         summary = self.coordinator.event_summary
         for pickup in self.coordinator.data:
             if pickup.date >= today:

@@ -14,8 +14,8 @@ A Home Assistant custom integration that exposes your Norwegian waste collection
 ## Features
 - **Calendar-only** — no sensor entities, just a clean calendar
 - **Grouped by pickup day** — one all-day event per date; the description lists every fraction collected that day (e.g. _"Restavfall, papir og plastemballasje"_)
-- **Full-year view** — fetches all pickup dates for a configurable number of days ahead (default 365, range 30–730)
-- **Lookback** — optionally include past pickup days (default 30 days back)
+- **Configurable look-ahead** — fetches all pickup dates for a configurable number of days ahead (default 90, range 30–730)
+- **Lookback** — optionally include past pickup days (default 14 days back, range 0–365)
 - **Fraction filtering** — exclude fractions like "Farlig avfall" that clutter the calendar
 - **UI-based setup** — config flow with Norwegian address search, no YAML needed
 - **DataUpdateCoordinator** — reduced polling (once every 7 days)
@@ -23,14 +23,17 @@ A Home Assistant custom integration that exposes your Norwegian waste collection
 ## Installation
 
 ### HACS (recommended)
-1. Open HACS → **Integrations** → three-dot menu → **Custom repositories**
-2. Add this repository URL with category **Integration**
+1. Open HACS → three-dot menu → **Custom repositories**
+2. Add this repository URL with type **Integration**
    ( https://github.com/aalbretsen/min-renovasjon-kalender )
 3. Search for _Min Renovasjon Kalender_ and download
 4. Restart Home Assistant
 
 ### Manual
 Copy the `custom_components/min_renovasjon_kalender/` folder into your Home Assistant `config/custom_components/` directory and restart.
+
+Requires **Home Assistant 2026.3.0 or newer** (the integration ships its own brand images in
+`custom_components/min_renovasjon_kalender/brand/`, which Home Assistant supports from 2026.3).
 
 ## Setup
 1. Go to **Settings → Devices & services → Add Integration**

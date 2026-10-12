@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "Home Assistant custom integration – waste collection calendar for Norwegian municipalities"
 readme = "README.md"
 license = { text = "MIT" }
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 
 # No runtime dependencies – HA provides everything at runtime.
 dependencies = []
@@ -20,7 +20,7 @@ dev = [
 ]
 
 [tool.ruff]
-target-version = "py312"
+target-version = "py314"
 line-length = 88
 
 [tool.ruff.lint]
@@ -39,7 +39,7 @@ select = [
 known-first-party = ["custom_components.min_renovasjon_kalender"]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.14"
 ignore_missing_imports = true
 follow_imports = "silent"
 

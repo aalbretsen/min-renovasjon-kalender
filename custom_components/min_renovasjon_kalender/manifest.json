@@ -1,9 +1,9 @@
 {
   "domain": "min_renovasjon_kalender",
   "name": "Min Renovasjon Kalender",
-  "codeowners": [],
+  "codeowners": ["@aalbretsen"],
   "config_flow": true,
-  "documentation": "https://github.com/aalbretsen/github",
+  "documentation": "https://github.com/aalbretsen/min-renovasjon-kalender",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/aalbretsen/min-renovasjon-kalender/issues",

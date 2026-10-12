@@ -12,6 +12,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.util import dt as dt_util
 
 from .api import MinRenovasjonApiClient, MinRenovasjonApiError
 from .const import (
@@ -43,12 +44,17 @@ class PickupEvent:
     fractions: list[str]
 
 
+type MinRenovasjonConfigEntry = ConfigEntry[MinRenovasjonCoordinator]
+
+
 class MinRenovasjonCoordinator(DataUpdateCoordinator[list[PickupEvent]]):
     """Coordinator that fetches and groups waste pickup data."""
 
-    config_entry: ConfigEntry
+    config_entry: MinRenovasjonConfigEntry
 
-    def __init__(self, hass: HomeAssistant, entry: ConfigEntry) -> None:
+    def __init__(
+        self, hass: HomeAssistant, entry: MinRenovasjonConfigEntry
+    ) -> None:
         """Initialise the coordinator."""
         super().__init__(
             hass,
@@ -96,8 +102,9 @@ class MinRenovasjonCoordinator(DataUpdateCoordinator[list[PickupEvent]]):
         session = async_get_clientsession(self.hass)
         client = MinRenovasjonApiClient(session)
 
-        fra_dato = (date.today() - timedelta(days=self.calendar_days_back)).strftime("%Y-%m-%d")
-        til_dato = (date.today() + timedelta(days=self.calendar_days)).strftime("%Y-%m-%d")
+        today = dt_util.now().date()
+        fra_dato = (today - timedelta(days=self.calendar_days_back)).isoformat()
+        til_dato = (today + timedelta(days=self.calendar_days)).isoformat()
 
         try:
             tommekalender = await client.async_get_tommekalender(

@@ -1,7 +1,6 @@
 """API client for the Min Renovasjon service."""
 from __future__ import annotations
 
-import asyncio
 import json
 import logging
 import socket
@@ -10,13 +9,13 @@ from typing import Any
 import aiohttp
 
 from .const import (
+    ADDRESS_LOOKUP_URL,
+    APP_CUSTOMERS_URL,
     CONST_APP_KEY,
     CONST_APP_KEY_VALUE,
     CONST_KOMMUNE_NUMMER,
     CONST_URL_FRAKSJONER,
     CONST_URL_TOMMEKALENDER,
-    ADDRESS_LOOKUP_URL,
-    APP_CUSTOMERS_URL,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -115,7 +114,7 @@ class MinRenovasjonApiClient:
                 data = await resp.read()
                 return json.loads(data.decode("UTF-8"))
 
-        except (asyncio.TimeoutError, aiohttp.ClientError, socket.gaierror) as exc:
+        except (TimeoutError, aiohttp.ClientError, socket.gaierror) as exc:
             raise MinRenovasjonApiError(
                 f"Request error: {exc} ({url})"
             ) from exc

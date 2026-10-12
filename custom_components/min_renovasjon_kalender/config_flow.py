@@ -3,19 +3,21 @@ from __future__ import annotations
 
 import logging
 import re
+import urllib.parse
+from datetime import timedelta
 from typing import Any
 
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-
 from homeassistant.config_entries import (
     ConfigEntry,
     ConfigFlow,
     ConfigFlowResult,
-    OptionsFlow,
+    OptionsFlowWithReload,
 )
 from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.util import dt as dt_util
 
 from .api import MinRenovasjonApiClient, MinRenovasjonApiError
 from .const import (
@@ -127,7 +129,7 @@ class MinRenovasjonKalenderConfigFlow(ConfigFlow, domain=DOMAIN):
         return MinRenovasjonKalenderOptionsFlow()
 
 
-class MinRenovasjonKalenderOptionsFlow(OptionsFlow):
+class MinRenovasjonKalenderOptionsFlow(OptionsFlowWithReload):
     """Handle options for Min Renovasjon Kalender."""
 
     async def async_step_init(
@@ -178,7 +180,7 @@ class MinRenovasjonKalenderOptionsFlow(OptionsFlow):
         )
 
     async def _async_get_available_fractions(self) -> dict[str, str]:
-        """Fetch fractions from API and return {id_str: name} for fractions with data."""
+        """Return {id_str: name} for the fractions that have calendar data."""
         session = async_get_clientsession(self.hass)
         client = MinRenovasjonApiClient(session)
 
@@ -190,11 +192,9 @@ class MinRenovasjonKalenderOptionsFlow(OptionsFlow):
         try:
             fraksjoner = await client.async_get_fraksjoner(county_id)
             # Fetch a short calendar to see which fractions actually have data
-            from datetime import date, timedelta
-            import urllib.parse
-
-            fra_dato = date.today().strftime("%Y-%m-%d")
-            til_dato = (date.today() + timedelta(days=365)).strftime("%Y-%m-%d")
+            today = dt_util.now().date()
+            fra_dato = today.isoformat()
+            til_dato = (today + timedelta(days=365)).isoformat()
             encoded_street = urllib.parse.quote(
                 urllib.parse.unquote(street_name)
             )
